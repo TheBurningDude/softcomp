@@ -84,11 +84,11 @@ public class PlayerControlSystem implements IEntityProcessingService {
             entity.setDy(dy);
             entity.setRadians(radians);
 
-            updateShape(entity);
+            setShape(entity);
         }
     }
 
-    private void updateShape(Entity entity) {
+    private void setShape(Entity entity) {
         float[] shapex = entity.getShapeX();
         float[] shapey = entity.getShapeY();
         float x = entity.getX();

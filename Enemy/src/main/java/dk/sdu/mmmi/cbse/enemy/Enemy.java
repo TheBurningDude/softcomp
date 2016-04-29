@@ -19,65 +19,26 @@ import com.badlogic.gdx.math.MathUtils;
  */
 @ServiceProvider(service = IEntityProcessingService.class)
 public class Enemy implements IEntityProcessingService {
+
     private boolean remove;
-    
+
     @Override
     public void process(GameData gameData, Map<String, Entity> world, Entity entity) {
-        float x = entity.getX();
-        float y = entity.getY();
-        float dt = gameData.getDelta();
-        float dx = entity.getDx();
-        float dy = entity.getDy();
-        float acceleration = entity.getAcceleration();
-        float deceleration = entity.getDeacceleration();
-        float speed = entity.getMaxSpeed();
-        float rotationSpeed = entity.getRotationSpeed();
-        int r = MathUtils.random.nextInt(4000);
-        
-        if (entity.getType().equals(ENEMY)) {    
-            if(r >= 0 && r < 100){
-                x += 10;
-            }
-            if(r >= 100 && r < 200){
-                x -= 10;
-            }
-            if(r >= 200 && r < 300){
-                y += 10;
-            }
-            if(r >=300 && r < 400){
-                y -= 10;
-            }
-            
-            // Screen wrap
-            x += dx * dt;
-            if(x > gameData.getDisplayWidth()){
-                x = 0;
-            }else if(x < 0){
-                x = gameData.getDisplayWidth();
-            }
-            
-            y += dy * dt;
-            if(y > gameData.getDisplayHeight()){
-                y = 0;
-            }else if(y < 0){
-                y = gameData.getDisplayHeight();
-            }
-                
+
+        if (entity.getType().equals(ENEMY)) {
+
             // update entity
-            entity.setPosition(x, y);
-            entity.setDx(dx);
-            entity.setDy(dy);
-            
+            wrap(gameData, entity);
+            movement(gameData, entity);
             updateShape(entity);
         }
     }
-    
+
     private void updateShape(Entity entity) {
         float[] shapex = entity.getShapeX();
         float[] shapey = entity.getShapeY();
         float x = entity.getX();
         float y = entity.getY();
-        float radians = entity.getRadians();
 
         shapex[0] = x - 10;
         shapey[0] = y;
@@ -96,11 +57,62 @@ public class Enemy implements IEntityProcessingService {
 
         shapex[5] = x - 3;
         shapey[5] = y + 5;
-        
+
         entity.setShapeX(shapex);
         entity.setShapeY(shapey);
     }
-    
-    public boolean shouldRemove() { return remove; }
+
+    private void movement(GameData gameData, Entity entity) {
+        float x = entity.getX();
+        float y = entity.getY();
+
+        int r = MathUtils.random.nextInt(1000);
+
+        if (r >= 0 && r < 100) {
+            x += 10;
+        }
+        if (r >= 100 && r < 200) {
+            x -= 10;
+        }
+        if (r >= 200 && r < 300) {
+            y += 10;
+        }
+        if (r >= 300 && r < 400) {
+            y -= 10;
+        }
+
+        entity.setPosition(x, y);
+    }
+
+    private void wrap(GameData gameData, Entity entity) {
+        float x = entity.getX();
+        float y = entity.getY();
+        float dt = gameData.getDelta();
+        float dx = entity.getDx();
+        float dy = entity.getDy();
+
+        // Screen wrap
+        x += dx * dt;
+        if (x > gameData.getDisplayWidth()) {
+            x = 0;
+        } else if (x < 0) {
+            x = gameData.getDisplayWidth();
+        }
+
+        y += dy * dt;
+        if (y > gameData.getDisplayHeight()) {
+            y = 0;
+        } else if (y < 0) {
+            y = gameData.getDisplayHeight();
+        }
+        entity.setDx(dx);
+        entity.setDy(dy);
+        entity.setPosition(x, y);
+
+    }
+
+    private boolean shouldRemove() {
+        return remove;
+    }
 
 }

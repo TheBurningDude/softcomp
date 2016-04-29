@@ -21,10 +21,8 @@ public final class Entity implements Serializable {
     private float radius;
     private boolean isHit = false;
     private float expiration;
-    private float pathTimer;
-    private float pathTime1;
-    private float pathTime2;
-    private int direction;
+    private int width;
+    private int height;
     
     public void reduceExpiration(float delta){
         this.expiration -= delta;
@@ -165,6 +163,22 @@ public final class Entity implements Serializable {
 
     public void setRotationSpeed(int rotationSpeed) {
         this.rotationSpeed = rotationSpeed;
+    }
+    
+    public int getWidth(){
+        return width;
+    }
+    
+    public void setWidth(int width){
+        this.width = width;
+    }
+    
+    public int getHeight(){
+        return height;
+    }
+    
+    public void setHeight(int height){
+        this.height = height;
     }
 
 }

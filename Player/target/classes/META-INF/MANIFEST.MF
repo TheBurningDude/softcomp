@@ -2,8 +2,8 @@ Manifest-Version: 1.0
 OpenIDE-Module-Localizing-Bundle: dk/sdu/mmmi/cbse/player/Bundle.prope
  rties
 OpenIDE-Module-Specification-Version: 1.0
-OpenIDE-Module-Implementation-Version: 1.0-20160421
-OpenIDE-Module-Build-Version: 201604211223
+OpenIDE-Module-Implementation-Version: 1.0-20160429
+OpenIDE-Module-Build-Version: 201604291112
 OpenIDE-Module: dk.sdu.mmmi.cbse.Player
 OpenIDE-Module-Public-Packages: dk.sdu.mmmi.cbse.player.*
 OpenIDE-Module-Requires: org.openide.modules.ModuleFormat1

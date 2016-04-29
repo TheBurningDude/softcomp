@@ -7,9 +7,9 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 
 public class Activator implements BundleActivator {
-
-    private ServiceRegistration<IGamePluginService> r;
-    private ServiceRegistration<IEntityProcessingService> s;
+    //Generic...
+    private ServiceRegistration r;
+    private ServiceRegistration s;
 
     @Override
     public void start(BundleContext context) throws Exception {

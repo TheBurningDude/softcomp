@@ -62,10 +62,11 @@
         <module>Player</module>
         <module>SilentUpdate</module>
         <module>Spring</module>
-        <module>Enemy</module>
     <module>Asteroids</module>
     <module>Bullet</module>
-  </modules>
+        <module>Enemy</module>
+        <module>Launcher</module>
+    </modules>
 
     <properties>
         <netbeans.version>RELEASE81</netbeans.version>

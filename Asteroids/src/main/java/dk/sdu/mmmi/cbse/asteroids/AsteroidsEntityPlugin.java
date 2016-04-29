@@ -18,14 +18,14 @@ import java.util.Map;
 public class AsteroidsEntityPlugin implements IGamePluginService {
 
     private Map<String, Entity> world;
-    private Entity asteroids;
+    private Entity asteroid;
     
     @Override
     public void start(GameData gameData, Map<String, Entity> world) {
         this.world = world;
         //Add entities to the world
-        asteroids = createAsteroids(gameData);
-        world.put(asteroids.getID(), asteroids);
+        asteroid = createAsteroids(gameData);
+        world.put(asteroid.getID(), asteroid);
     }
     
     private Entity createAsteroids(GameData gameData){
@@ -46,7 +46,7 @@ public class AsteroidsEntityPlugin implements IGamePluginService {
     @Override
     public void stop(GameData gameData) {
         //Remove entities
-        world.remove(asteroids.getID());
+        world.remove(asteroid.getID());
     }
     
 }

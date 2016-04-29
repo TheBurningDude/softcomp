@@ -31,6 +31,11 @@
             <version>1.0-SNAPSHOT</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>com.badlogicgames.gdx</groupId>
+            <artifactId>gdx</artifactId>
+            <version>1.5.0</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -40,12 +45,6 @@
                 <artifactId>maven-bundle-plugin</artifactId>
                 <version>2.3.7</version>
                 <extensions>true</extensions>
-                <configuration>
-                    <instructions>
-                        <Bundle-Activator>dk.sdu.mmmi.cbse.bullet.Activator</Bundle-Activator>
-                        <Export-Package />
-                    </instructions>
-                </configuration>
             </plugin>
         </plugins>
     </build>
