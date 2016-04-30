@@ -33,13 +33,14 @@ public class EntityPlugin implements IGamePluginService {
     private Entity createEnemyShip(GameData gameData){
         Entity enemyShip = new Entity();
         enemyShip.setType(EntityType.ENEMY);
-        
-        
-        
-        enemyShip.setMaxSpeed(70);
+
+        enemyShip.setMaxSpeed(3);
 
 	enemyShip.setShapeX(new float[6]);
         enemyShip.setShapeY(new float[6]);
+        
+        enemyShip.setRadians(3.1415f / 2);
+        enemyShip.setRotationSpeed(5);
         
         return enemyShip;
         

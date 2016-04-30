@@ -21,14 +21,12 @@ public class Activator extends ModuleInstall {
         exector.scheduleAtFixedRate(doCheck, 10000, 10000, TimeUnit.MILLISECONDS);
     }
 
-    private static final Runnable doCheck = new Runnable() {
-        @Override
-        public void run() {
-            if (UpdateHandler.timeToCheck()) {
-                UpdateHandler.checkAndHandleUpdates();
-            }
-        }
-
-    };
+    private static final Runnable doCheck = () ->
+            {
+                if (UpdateHandler.timeToCheck())
+                {
+                    UpdateHandler.checkAndHandleModules();
+                }
+            };
 
 }

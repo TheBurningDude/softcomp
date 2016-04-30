@@ -66,6 +66,8 @@
     <module>Bullet</module>
         <module>Enemy</module>
         <module>Launcher</module>
+    <module>AsteroidsAPI</module>
+        <module>BulletTest</module>
     </modules>
 
     <properties>

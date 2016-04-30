@@ -12,6 +12,9 @@ import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import java.util.Map;
 import org.openide.util.lookup.ServiceProvider;
 import com.badlogic.gdx.math.MathUtils;
+import static java.lang.Math.cos;
+import static java.lang.Math.sin;
+import static java.lang.Math.sqrt;
 
 /**
  *
@@ -65,22 +68,40 @@ public class Enemy implements IEntityProcessingService {
     private void movement(GameData gameData, Entity entity) {
         float x = entity.getX();
         float y = entity.getY();
+        float dx = entity.getDx();
+        float dy = entity.getDy();
+        float radians = entity.getRadians();
+        float acceleration = entity.getAcceleration();
+        float deacceleration = entity.getDeacceleration();
+        float maxSpeed = entity.getMaxSpeed();
+        float rotationSpeed = entity.getRotationSpeed();
+        float dt = gameData.getDelta();
 
-        int r = MathUtils.random.nextInt(1000);
+        int r = MathUtils.random.nextInt(2000);
 
+        // accelerating            
+        x += cos(radians) * maxSpeed;
+        y += sin(radians) * maxSpeed;
+        
+        //right
         if (r >= 0 && r < 100) {
-            x += 10;
+            radians -= rotationSpeed;
         }
+        //left
         if (r >= 100 && r < 200) {
-            x -= 10;
+            radians += rotationSpeed;
         }
-        if (r >= 200 && r < 300) {
-            y += 10;
-        }
-        if (r >= 300 && r < 400) {
-            y -= 10;
-        }
+        /*if (r >= 200 && r < 300) {
 
+        }*/
+ /*
+        if (r >= 300 && r < 400) {
+            dy -= 10;
+        }*/
+
+        entity.setDx(dx);
+        entity.setDy(dy);
+        entity.setRadians(radians);
         entity.setPosition(x, y);
     }
 

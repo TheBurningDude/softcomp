@@ -5,109 +5,40 @@
  */
 package dk.sdu.mmmi.cbse.bullet;
 
-import com.badlogic.gdx.math.MathUtils;
-import dk.sdu.mmmi.cbse.common.data.Entity;
-import static dk.sdu.mmmi.cbse.common.data.EntityType.PLAYER;
-import dk.sdu.mmmi.cbse.common.data.GameData;
-import static dk.sdu.mmmi.cbse.common.data.GameKeys.SPACE;
+import org.osgi.framework.ServiceReference;
+import org.osgi.service.component.ComponentContext;
+import dk.sdu.mmmi.cbse.asteroidsapi.IBulletService;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
-import java.util.Map;
 
 /**
  *
  * @author nasib
  */
-public class Bullet implements IEntityProcessingService {
-    //Declarity services
-    private float lifeTime;
-    private float lifeTimer;
-    private boolean remove;
-
-    @Override
-    public void process(GameData gameData, Map<String, Entity> world, Entity entity) {
-        float x = entity.getX();
-        float y = entity.getY();
-        float radians = entity.getRadians();
-        int width = entity.getWidth();
-        int height = entity.getHeight();
-        float dx = entity.getDx();
-        float dy = entity.getDy();
-        float speed = 350;
-        
-
-        
-            Entity bullet = new Entity();
-            bullet.setX(entity.getX() + 10f);
-            bullet.setY(entity.getY());
-            bullet.setMaxSpeed(speed);
-            System.out.println("somalier");
-           
-            
-            
-
-            width = height = 2;
-            
-            wrap(gameData, bullet);
-            setShape(bullet);
-            
-             world.put(bullet.getID(), bullet);
-        
-
-    } 
+public class Bullet {
     
-    private void setShape(Entity entity) {
-        float x = entity.getX();
-        float y = entity.getY();
-        float[] shapex = entity.getShapeX();
-        float[] shapey = entity.getShapeY();
-        float radians = entity.getRadians();
+    ComponentContext context;
+    ServiceReference reference;
+    IBulletService bulletService ;
+    
+    public void activate(ComponentContext context){
+        if (reference != null) {
+            bulletService = (IBulletService) context.locateService(
+                    "IBulletService", reference);
 
-        shapex[0] = x + MathUtils.cos(radians) * 8;
-        shapey[0] = y + MathUtils.sin(radians) * 8;
+            System.out.println("WUDIAAAAAAAAAAAAAAAAAAAAA");
 
-        shapex[1] = x + MathUtils.cos(radians - 4 * 3.1415f / 5) * 8;
-        shapey[1] = y + MathUtils.sin(radians - 4 * 3.1415f / 5) * 8;
-
-        shapex[2] = x + MathUtils.cos(radians + 3.1415f) * 5;
-        shapey[2] = y + MathUtils.sin(radians + 3.1415f) * 5;
-
-        shapex[3] = x + MathUtils.cos(radians + 4 * 3.1415f / 5) * 8;
-        shapey[3] = y + MathUtils.sin(radians + 4 * 3.1415f / 5) * 8;
+        }
         
-        entity.setShapeX(shapex);
-        entity.setShapeY(shapey);
     }
     
-    private void wrap(GameData gameData, Entity entity) {
-        float x = entity.getX();
-        float y = entity.getY();
-        float dt = gameData.getDelta();
-        float dx = entity.getDx();
-        float dy = entity.getDy();
-
-        // Screen wrap
-        x += dx * dt;
-        if (x > gameData.getDisplayWidth()) {
-            x = 0;
-        } else if (x < 0) {
-            x = gameData.getDisplayWidth();
-        }
-
-        y += dy * dt;
-        if (y > gameData.getDisplayHeight()) {
-            y = 0;
-        } else if (y < 0) {
-            y = gameData.getDisplayHeight();
-        }
-        entity.setDx(dx);
-        entity.setDy(dy);
-        entity.setPosition(x, y);
-
+    public void gotService(ServiceReference reference) {
+        System.out.println("Bind Service");
+        this.reference = reference;
     }
-    
-    
-    private boolean shouldRemove() {
-        return remove;
+
+    public void lostService(ServiceReference reference) {
+        System.out.println("unbind Service");
+        this.reference = null;
     }
 
 }

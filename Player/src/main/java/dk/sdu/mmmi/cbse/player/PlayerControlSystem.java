@@ -18,10 +18,19 @@ import org.openide.util.lookup.ServiceProvider;
 
 @ServiceProvider(service = IEntityProcessingService.class)
 public class PlayerControlSystem implements IEntityProcessingService {
+
     @Override
     public void process(GameData gameData, Map<String, Entity> world, Entity entity) {
-        float x = entity.getX();
-        float y = entity.getY();
+
+        if (entity.getType().equals(PLAYER)) {
+            // Update entity
+            movement(gameData, entity);
+            wrap(gameData, entity);
+            setShape(entity);
+        }
+    }
+
+    private void movement(GameData gameData, Entity entity) {
         float dt = gameData.getDelta();
         float dx = entity.getDx();
         float dy = entity.getDy();
@@ -30,62 +39,40 @@ public class PlayerControlSystem implements IEntityProcessingService {
         float maxSpeed = entity.getMaxSpeed();
         float radians = entity.getRadians();
         float rotationSpeed = entity.getRotationSpeed();
+        // turning
+        if (gameData.getKeys().isDown(LEFT)) {
+            radians += rotationSpeed * dt;
+        }
 
-        if (entity.getType().equals(PLAYER)) {
-            // turning
-            if (gameData.getKeys().isDown(LEFT)) {
-                radians += rotationSpeed * dt;
-            }
-            
-            if (gameData.getKeys().isDown(RIGHT)) {
-                radians -= rotationSpeed * dt;
-            }
-            
-            //Shoot
+        if (gameData.getKeys().isDown(RIGHT)) {
+            radians -= rotationSpeed * dt;
+        }
+
+        /*//Shoot
             if(gameData.getKeys().isDown(SPACE)){
                 gameData.addEvent(new Event(EventType.PLAYER_SHOOT));
-            }
-
-            // accelerating            
-            if (gameData.getKeys().isDown(UP)) {
-                dx += cos(radians) * acceleration * dt;
-                dy += sin(radians) * acceleration * dt;
-            }
-
-            // deceleration
-            float vec = (float) sqrt(dx * dx + dy * dy);
-            if (vec > 0) {
-                dx -= (dx / vec) * deceleration * dt;
-                dy -= (dy / vec) * deceleration * dt;
-            }
-            if (vec > maxSpeed) {
-                dx = (dx / vec) * maxSpeed;
-                dy = (dy / vec) * maxSpeed;
-            }
-
-            // Screen wrap
-            x += dx * dt;
-            if(x > gameData.getDisplayWidth()){
-                x = 0;
-            }else if(x < 0){
-                x = gameData.getDisplayWidth();
-            }
-            
-            y += dy * dt;
-            if(y > gameData.getDisplayHeight()){
-                y = 0;
-            }else if(y < 0){
-                y = gameData.getDisplayHeight();
-            }
-            
-            // Update entity
-            entity.setPosition(x, y);
-            entity.setDx(dx);
-            entity.setDy(dy);
-            entity.setRadians(radians);
-
-            setShape(entity);
+            }*/
+        // accelerating            
+        if (gameData.getKeys().isDown(UP)) {
+            dx += cos(radians) * acceleration * dt;
+            dy += sin(radians) * acceleration * dt;
         }
+
+        // deceleration
+        float vec = (float) sqrt(dx * dx + dy * dy);
+        if (vec > 0) {
+            dx -= (dx / vec) * deceleration * dt;
+            dy -= (dy / vec) * deceleration * dt;
+        }
+        if (vec > maxSpeed) {
+            dx = (dx / vec) * maxSpeed;
+            dy = (dy / vec) * maxSpeed;
+        }
+
+        entity.setDx(dx);
+        entity.setDy(dy);
+        entity.setRadians(radians);
+
     }
 
     private void setShape(Entity entity) {
@@ -109,6 +96,33 @@ public class PlayerControlSystem implements IEntityProcessingService {
 
         entity.setShapeX(shapex);
         entity.setShapeY(shapey);
+    }
+
+    private void wrap(GameData gameData, Entity entity) {
+        float x = entity.getX();
+        float y = entity.getY();
+        float dt = gameData.getDelta();
+        float dx = entity.getDx();
+        float dy = entity.getDy();
+
+        // Screen wrap
+        x += dx * dt;
+        if (x > gameData.getDisplayWidth()) {
+            x = 0;
+        } else if (x < 0) {
+            x = gameData.getDisplayWidth();
+        }
+
+        y += dy * dt;
+        if (y > gameData.getDisplayHeight()) {
+            y = 0;
+        } else if (y < 0) {
+            y = gameData.getDisplayHeight();
+        }
+        entity.setDx(dx);
+        entity.setDy(dy);
+        entity.setPosition(x, y);
+
     }
 
 }

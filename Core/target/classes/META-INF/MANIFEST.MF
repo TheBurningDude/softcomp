@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 OpenIDE-Module-Install: dk/sdu/mmmi/cbse/core/main/Installer.class
 OpenIDE-Module-Specification-Version: 1.0
-OpenIDE-Module-Implementation-Version: 1.0-20160429
-OpenIDE-Module-Build-Version: 201604291112
+OpenIDE-Module-Implementation-Version: 1.0-20160430
+OpenIDE-Module-Build-Version: 201604301910
 OpenIDE-Module: dk.sdu.mmmi.cbse.Core
 OpenIDE-Module-Public-Packages: -
 OpenIDE-Module-Requires: org.openide.modules.ModuleFormat1
@@ -25,7 +25,8 @@ X-Class-Path: ext/dk.sdu.mmmi.cbse.Core/com-badlogicgames-gdx/gdx.jar
  jar ext/dk.sdu.mmmi.cbse.Core/com-badlogicgames-gdx/gdx-box2d-platfor
  m-natives-desktop.jar ext/dk.sdu.mmmi.cbse.Core/com-badlogicgames-gdx
  /gdx-freetype.jar ext/dk.sdu.mmmi.cbse.Core/com-badlogicgames-gdx/gdx
- -freetype-platform-natives-desktop.jar
+ -freetype-platform-natives-desktop.jar ext/dk.sdu.mmmi.cbse.Core/org-
+ netbeans-external/osgi.cmpn-4.2.jar
 Maven-Class-Path: com.badlogicgames.gdx:gdx:1.5.0 com.badlogicgames.gd
  x:gdx-platform:1.5.0:natives-desktop com.badlogicgames.gdx:gdx-backen
  d-lwjgl:1.5.0 org.lwjgl.lwjgl:lwjgl:2.9.1 org.lwjgl.lwjgl:lwjgl-platf
@@ -36,7 +37,7 @@ Maven-Class-Path: com.badlogicgames.gdx:gdx:1.5.0 com.badlogicgames.gd
  :0.0.17 com.badlogicgames.gdx:gdx-box2d:1.5.0 com.badlogicgames.gdx:g
  dx-box2d-platform:1.5.0:natives-desktop com.badlogicgames.gdx:gdx-fre
  etype:1.5.0 com.badlogicgames.gdx:gdx-freetype-platform:1.5.0:natives
- -desktop
+ -desktop org.netbeans.external:osgi.cmpn-4.2:RELEASE81
 OpenIDE-Module-Module-Dependencies: org.netbeans.api.annotations.commo
  n/1 > 1.26.1, org.openide.modules > 7.47.1, org.openide.util > 9.5.1,
   dk.sdu.mmmi.cbse.Common > 1.0, org.openide.util.lookup > 8.32.1

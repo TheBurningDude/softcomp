@@ -10,11 +10,13 @@ import static dk.sdu.mmmi.cbse.common.data.EntityType.ASTEROIDS;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import java.util.Map;
+import org.openide.util.lookup.ServiceProvider;
 
 /**
  *
  * @author nasib
  */
+@ServiceProvider(service = IEntityProcessingService.class)
 public class AsteroidsControlSystem implements IEntityProcessingService {
 
     @Override
