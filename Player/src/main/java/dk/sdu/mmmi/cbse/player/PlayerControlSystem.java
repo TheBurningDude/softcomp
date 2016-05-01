@@ -3,16 +3,7 @@ package dk.sdu.mmmi.cbse.player;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import static dk.sdu.mmmi.cbse.common.data.EntityType.PLAYER;
 import dk.sdu.mmmi.cbse.common.data.GameData;
-import static dk.sdu.mmmi.cbse.common.data.GameKeys.LEFT;
-import static dk.sdu.mmmi.cbse.common.data.GameKeys.RIGHT;
-import static dk.sdu.mmmi.cbse.common.data.GameKeys.SPACE;
-import static dk.sdu.mmmi.cbse.common.data.GameKeys.UP;
-import dk.sdu.mmmi.cbse.common.events.Event;
-import dk.sdu.mmmi.cbse.common.events.EventType;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
-import static java.lang.Math.cos;
-import static java.lang.Math.sin;
-import static java.lang.Math.sqrt;
 import java.util.Map;
 import org.openide.util.lookup.ServiceProvider;
 
@@ -24,55 +15,9 @@ public class PlayerControlSystem implements IEntityProcessingService {
 
         if (entity.getType().equals(PLAYER)) {
             // Update entity
-            movement(gameData, entity);
             wrap(gameData, entity);
             setShape(entity);
         }
-    }
-
-    private void movement(GameData gameData, Entity entity) {
-        float dt = gameData.getDelta();
-        float dx = entity.getDx();
-        float dy = entity.getDy();
-        float acceleration = entity.getAcceleration();
-        float deceleration = entity.getDeacceleration();
-        float maxSpeed = entity.getMaxSpeed();
-        float radians = entity.getRadians();
-        float rotationSpeed = entity.getRotationSpeed();
-        // turning
-        if (gameData.getKeys().isDown(LEFT)) {
-            radians += rotationSpeed * dt;
-        }
-
-        if (gameData.getKeys().isDown(RIGHT)) {
-            radians -= rotationSpeed * dt;
-        }
-
-        /*//Shoot
-            if(gameData.getKeys().isDown(SPACE)){
-                gameData.addEvent(new Event(EventType.PLAYER_SHOOT));
-            }*/
-        // accelerating            
-        if (gameData.getKeys().isDown(UP)) {
-            dx += cos(radians) * acceleration * dt;
-            dy += sin(radians) * acceleration * dt;
-        }
-
-        // deceleration
-        float vec = (float) sqrt(dx * dx + dy * dy);
-        if (vec > 0) {
-            dx -= (dx / vec) * deceleration * dt;
-            dy -= (dy / vec) * deceleration * dt;
-        }
-        if (vec > maxSpeed) {
-            dx = (dx / vec) * maxSpeed;
-            dy = (dy / vec) * maxSpeed;
-        }
-
-        entity.setDx(dx);
-        entity.setDy(dy);
-        entity.setRadians(radians);
-
     }
 
     private void setShape(Entity entity) {

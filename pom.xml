@@ -68,6 +68,7 @@
         <module>Launcher</module>
     <module>AsteroidsAPI</module>
         <module>BulletTest</module>
+        <module>Movement</module>
     </modules>
 
     <properties>

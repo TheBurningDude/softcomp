@@ -5,16 +5,15 @@
  */
 package dk.sdu.mmmi.cbse.enemy;
 
+import com.badlogic.gdx.math.MathUtils;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import static dk.sdu.mmmi.cbse.common.data.EntityType.ENEMY;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
-import java.util.Map;
-import org.openide.util.lookup.ServiceProvider;
-import com.badlogic.gdx.math.MathUtils;
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
-import static java.lang.Math.sqrt;
+import java.util.Map;
+import org.openide.util.lookup.ServiceProvider;
 
 /**
  *
@@ -23,21 +22,17 @@ import static java.lang.Math.sqrt;
 @ServiceProvider(service = IEntityProcessingService.class)
 public class Enemy implements IEntityProcessingService {
 
-    private boolean remove;
-
     @Override
     public void process(GameData gameData, Map<String, Entity> world, Entity entity) {
 
         if (entity.getType().equals(ENEMY)) {
-
-            // update entity
+            // update entity     
+            setShape(entity);
             wrap(gameData, entity);
-            movement(gameData, entity);
-            updateShape(entity);
         }
     }
 
-    private void updateShape(Entity entity) {
+    private void setShape(Entity entity) {
         float[] shapex = entity.getShapeX();
         float[] shapey = entity.getShapeY();
         float x = entity.getX();
@@ -65,46 +60,6 @@ public class Enemy implements IEntityProcessingService {
         entity.setShapeY(shapey);
     }
 
-    private void movement(GameData gameData, Entity entity) {
-        float x = entity.getX();
-        float y = entity.getY();
-        float dx = entity.getDx();
-        float dy = entity.getDy();
-        float radians = entity.getRadians();
-        float acceleration = entity.getAcceleration();
-        float deacceleration = entity.getDeacceleration();
-        float maxSpeed = entity.getMaxSpeed();
-        float rotationSpeed = entity.getRotationSpeed();
-        float dt = gameData.getDelta();
-
-        int r = MathUtils.random.nextInt(2000);
-
-        // accelerating            
-        x += cos(radians) * maxSpeed;
-        y += sin(radians) * maxSpeed;
-        
-        //right
-        if (r >= 0 && r < 100) {
-            radians -= rotationSpeed;
-        }
-        //left
-        if (r >= 100 && r < 200) {
-            radians += rotationSpeed;
-        }
-        /*if (r >= 200 && r < 300) {
-
-        }*/
- /*
-        if (r >= 300 && r < 400) {
-            dy -= 10;
-        }*/
-
-        entity.setDx(dx);
-        entity.setDy(dy);
-        entity.setRadians(radians);
-        entity.setPosition(x, y);
-    }
-
     private void wrap(GameData gameData, Entity entity) {
         float x = entity.getX();
         float y = entity.getY();
@@ -130,10 +85,6 @@ public class Enemy implements IEntityProcessingService {
         entity.setDy(dy);
         entity.setPosition(x, y);
 
-    }
-
-    private boolean shouldRemove() {
-        return remove;
     }
 
 }
