@@ -9,6 +9,10 @@ import org.openide.util.Lookup;
 import org.openide.util.LookupEvent;
 import org.openide.util.LookupListener;
 import dk.sdu.mmmi.cbse.common.data.Entity;
+import static dk.sdu.mmmi.cbse.common.data.EntityType.ASTEROIDS;
+import static dk.sdu.mmmi.cbse.common.data.EntityType.BULLET;
+import static dk.sdu.mmmi.cbse.common.data.EntityType.ENEMY;
+import static dk.sdu.mmmi.cbse.common.data.EntityType.PLAYER;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
@@ -20,6 +24,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Game implements ApplicationListener {
+
     private static OrthographicCamera cam;
     private ShapeRenderer sr;
     private final Lookup lookup = Lookup.getDefault();
@@ -29,7 +34,7 @@ public class Game implements ApplicationListener {
     private List<IGamePluginService> gamePlugins;
 
     @Override
-    public void create() {        
+    public void create() {
         gameData.setDisplayWidth(Gdx.graphics.getWidth());
         gameData.setDisplayHeight(Gdx.graphics.getHeight());
 
@@ -40,12 +45,12 @@ public class Game implements ApplicationListener {
         sr = new ShapeRenderer();
 
         Gdx.input.setInputProcessor(new GameInputProcessor(gameData));
-        
+
         Lookup.Result<IGamePluginService> result = lookup.lookupResult(IGamePluginService.class);
         result.addLookupListener(lookupListener);
         gamePlugins = new ArrayList<>(result.allInstances());
         result.allItems();
-        
+
         for (IGamePluginService plugin : gamePlugins) {
             plugin.start(gameData, world);
         }
@@ -59,7 +64,7 @@ public class Game implements ApplicationListener {
 
         gameData.setDelta(Gdx.graphics.getDeltaTime());
         gameData.getKeys().update();
-        
+
         update();
         draw();
     }
@@ -75,21 +80,65 @@ public class Game implements ApplicationListener {
 
     private void draw() {
         for (Entity entity : world.values()) {
-            sr.setColor(1, 1, 1, 1);
+            if (entity.getType().equals(PLAYER)) {
+                sr.setColor(1, 1, 1, 1);
 
-            sr.begin(ShapeRenderer.ShapeType.Line);
+                sr.begin(ShapeRenderer.ShapeType.Line);
 
-            float[] shapex = entity.getShapeX();
-            float[] shapey = entity.getShapeY();
+                float[] shapex = entity.getShapeX();
+                float[] shapey = entity.getShapeY();
 
-            for (int i = 0, j = shapex.length - 1;
-                    i < shapex.length;
-                    j = i++) {
+                for (int i = 0, j = shapex.length - 1;
+                        i < shapex.length;
+                        j = i++) {
 
-                sr.line(shapex[i], shapey[i], shapex[j], shapey[j]);
+                    sr.line(shapex[i], shapey[i], shapex[j], shapey[j]);
+                }
+
+                sr.end();
             }
 
-            sr.end();
+            if (entity.getType().equals(BULLET)) {
+                sr.setColor(1, 1, 1, 1);
+                sr.begin(ShapeRenderer.ShapeType.Filled);
+                sr.circle(entity.getX() - entity.getRadius() / 2, entity.getY() + entity.getRadius() / 2, 2);
+                sr.end();
+
+            }
+            if (entity.getType().equals(ENEMY)) {
+                sr.setColor(1, 0, 0, 1);
+
+                sr.begin(ShapeRenderer.ShapeType.Line);
+
+                float[] shapex = entity.getShapeX();
+                float[] shapey = entity.getShapeY();
+
+                for (int i = 0, j = shapex.length - 1;
+                        i < shapex.length;
+                        j = i++) {
+
+                    sr.line(shapex[i], shapey[i], shapex[j], shapey[j]);
+                }
+
+                sr.end();
+            }
+            if (entity.getType().equals(ASTEROIDS)) {
+                sr.setColor(1, 1, 1, 1);
+
+                sr.begin(ShapeRenderer.ShapeType.Line);
+
+                float[] shapex = entity.getShapeX();
+                float[] shapey = entity.getShapeY();
+
+                for (int i = 0, j = shapex.length - 1;
+                        i < shapex.length;
+                        j = i++) {
+
+                    sr.line(shapex[i], shapey[i], shapex[j], shapey[j]);
+                }
+
+                sr.end();
+            }
         }
     }
 
@@ -112,7 +161,7 @@ public class Game implements ApplicationListener {
     private Collection<? extends IEntityProcessingService> getEntityProcessingServices() {
         return lookup.lookupAll(IEntityProcessingService.class);
     }
-    
+
     private final LookupListener lookupListener = new LookupListener() {
         @Override
         public void resultChanged(LookupEvent le) {
@@ -121,13 +170,13 @@ public class Game implements ApplicationListener {
                 if (!gamePlugins.contains(updatedGamePlugin)) {
                     updatedGamePlugin.start(gameData, world);
                     gamePlugins.add(updatedGamePlugin);
-               }
+                }
             }
-            
+
             //stop and remove module
             //Uninstall klasse i silent update med en uninstall xml fil til moduler, som skal afinstalleres
-            for(IGamePluginService gs : gamePlugins){
-                if(!lookup.lookupAll(IGamePluginService.class).contains(gs)){
+            for (IGamePluginService gs : gamePlugins) {
+                if (!lookup.lookupAll(IGamePluginService.class).contains(gs)) {
                     gs.stop(gameData);
                 }
                 gamePlugins.remove(gs);

@@ -104,6 +104,16 @@
             <artifactId>FlyingSaucer</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>Launcher</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>BulletTest</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <build>

@@ -12,7 +12,10 @@ import static dk.sdu.mmmi.cbse.common.data.EntityType.PLAYER;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import static dk.sdu.mmmi.cbse.common.data.GameKeys.LEFT;
 import static dk.sdu.mmmi.cbse.common.data.GameKeys.RIGHT;
+import static dk.sdu.mmmi.cbse.common.data.GameKeys.SPACE;
 import static dk.sdu.mmmi.cbse.common.data.GameKeys.UP;
+import dk.sdu.mmmi.cbse.common.events.Event;
+import dk.sdu.mmmi.cbse.common.events.EventType;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
@@ -65,7 +68,9 @@ public class MovementProcessing implements IEntityProcessingService {
         if (gameData.getKeys().isDown(RIGHT)) {
             radians -= rotationSpeed * dt;
         }
-
+        if(gameData.getKeys().isDown(SPACE)){
+            gameData.addEvent(new Event(EventType.PLAYER_SHOOT));
+        }
         // accelerating            
         if (gameData.getKeys().isDown(UP)) {
             dx += cos(radians) * acceleration * dt;
