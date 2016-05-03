@@ -66,9 +66,11 @@
     <module>Bullet</module>
         <module>Enemy</module>
         <module>Launcher</module>
-    <module>AsteroidsAPI</module>
         <module>BulletTest</module>
         <module>Movement</module>
+        <module>Map</module>
+        <module>CollisionDetection</module>
+        <module>UserInterface</module>
     </modules>
 
     <properties>

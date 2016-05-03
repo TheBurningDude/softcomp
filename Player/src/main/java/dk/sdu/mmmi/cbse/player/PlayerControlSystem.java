@@ -15,7 +15,6 @@ public class PlayerControlSystem implements IEntityProcessingService {
 
         if (entity.getType().equals(PLAYER)) {
             // Update entity
-            wrap(gameData, entity);
             setShape(entity);
         }
     }
@@ -41,33 +40,6 @@ public class PlayerControlSystem implements IEntityProcessingService {
 
         entity.setShapeX(shapex);
         entity.setShapeY(shapey);
-    }
-
-    private void wrap(GameData gameData, Entity entity) {
-        float x = entity.getX();
-        float y = entity.getY();
-        float dt = gameData.getDelta();
-        float dx = entity.getDx();
-        float dy = entity.getDy();
-
-        // Screen wrap
-        x += dx * dt;
-        if (x > gameData.getDisplayWidth()) {
-            x = 0;
-        } else if (x < 0) {
-            x = gameData.getDisplayWidth();
-        }
-
-        y += dy * dt;
-        if (y > gameData.getDisplayHeight()) {
-            y = 0;
-        } else if (y < 0) {
-            y = gameData.getDisplayHeight();
-        }
-        entity.setDx(dx);
-        entity.setDy(dy);
-        entity.setPosition(x, y);
-
     }
 
 }

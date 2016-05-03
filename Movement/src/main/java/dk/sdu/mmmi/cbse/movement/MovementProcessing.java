@@ -8,6 +8,7 @@ package dk.sdu.mmmi.cbse.movement;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import static dk.sdu.mmmi.cbse.common.data.EntityType.ASTEROIDS;
 import static dk.sdu.mmmi.cbse.common.data.EntityType.ENEMY;
+import static dk.sdu.mmmi.cbse.common.data.EntityType.MAP;
 import static dk.sdu.mmmi.cbse.common.data.EntityType.PLAYER;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import static dk.sdu.mmmi.cbse.common.data.GameKeys.LEFT;
@@ -30,7 +31,7 @@ import org.openide.util.lookup.ServiceProvider;
  */
 @ServiceProvider(service = IEntityProcessingService.class)
 public class MovementProcessing implements IEntityProcessingService {
-    
+
     Random rand = new Random();
 
     @Override
@@ -38,17 +39,21 @@ public class MovementProcessing implements IEntityProcessingService {
         if (entity.getType().equals(PLAYER)) {
             // Update entity
             playerMovement(gameData, entity);
+            wrap(gameData, entity);
         }
 
         if (entity.getType().equals(ENEMY)) {
             // Update entity
             enemyMovement(gameData, entity);
+            wrap(gameData, entity);
         }
 
-        if (entity.getType().equals(ASTEROIDS)) {
+        if (entity.getType().equals(ASTEROIDS) || entity.getType().equals(MAP)) {
             // Update entity
-
+            asteroidsMovement(gameData, entity);
+            wrap(gameData, entity);
         }
+
     }
 
     private void playerMovement(GameData gameData, Entity entity) {
@@ -68,7 +73,7 @@ public class MovementProcessing implements IEntityProcessingService {
         if (gameData.getKeys().isDown(RIGHT)) {
             radians -= rotationSpeed * dt;
         }
-        if(gameData.getKeys().isDown(SPACE)){
+        if (gameData.getKeys().isDown(SPACE)) {
             gameData.addEvent(new Event(EventType.PLAYER_SHOOT));
         }
         // accelerating            
@@ -124,6 +129,54 @@ public class MovementProcessing implements IEntityProcessingService {
         entity.setMaxSpeed(3);
         entity.setRotationSpeed(5);
         entity.setPosition(x, y);
+    }
+
+    private void asteroidsMovement(GameData gameData, Entity entity) {
+        float x = entity.getX();
+        float y = entity.getY();
+        float dx = entity.getDx();
+        float dy = entity.getDy();
+        float dt = gameData.getDelta();
+        float radians = entity.getRadians();
+        float speed = entity.getMaxSpeed();
+
+        x += dx * dt;
+        y += dy * dt;
+
+        dx = (float) (Math.cos(radians / 4) * speed);
+        dy = (float) (Math.sin(radians / 4) * speed);
+
+        entity.setPosition(x, y);
+        entity.setRadians(radians);
+        entity.setDx(dx);
+        entity.setDy(dy);
+    }
+
+    private void wrap(GameData gameData, Entity entity) {
+        float x = entity.getX();
+        float y = entity.getY();
+        float dt = gameData.getDelta();
+        float dx = entity.getDx();
+        float dy = entity.getDy();
+
+        // Screen wrap
+        x += dx * dt;
+        if (x > gameData.getDisplayWidth()) {
+            x = 0;
+        } else if (x < 0) {
+            x = gameData.getDisplayWidth();
+        }
+
+        y += dy * dt;
+        if (y > gameData.getDisplayHeight()) {
+            y = 0;
+        } else if (y < 0) {
+            y = gameData.getDisplayHeight();
+        }
+        entity.setDx(dx);
+        entity.setDy(dy);
+        entity.setPosition(x, y);
+
     }
 
 }

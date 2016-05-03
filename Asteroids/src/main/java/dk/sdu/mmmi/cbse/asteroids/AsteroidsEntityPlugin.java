@@ -5,7 +5,6 @@
  */
 package dk.sdu.mmmi.cbse.asteroids;
 
-import com.badlogic.gdx.math.MathUtils;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.EntityType;
 import dk.sdu.mmmi.cbse.common.data.GameData;
@@ -43,14 +42,28 @@ public class AsteroidsEntityPlugin implements IGamePluginService {
         asteroids.setType(EntityType.ASTEROIDS);
         int randHeight = rand.nextInt(gameData.getDisplayHeight());
         int randWidth = rand.nextInt(gameData.getDisplayWidth());
+        int randRadians = rand.nextInt((int) (2 * 3.1415f));
+        int randSize = rand.nextInt(4 - 1) + 1;
+        
+        switch (randSize) {
+            case 1:
+                asteroids.setMaxSpeed(30);
+                break;
+            case 2:
+                asteroids.setMaxSpeed(20);
+                break;
+            case 3:
+                asteroids.setMaxSpeed(10);
+                break;
+            default:
+                break;
+        }
         asteroids.setPosition(randHeight, randWidth);
+        asteroids.setRadians(randRadians);
+        asteroids.setSize(randSize);
 
         asteroids.setShapeX(new float[6]);
         asteroids.setShapeY(new float[6]);
-
-        asteroids.setRadians(3.1415f);
-//        asteroids.setDx(rW);
-//        asteroids.setDy(rW);
 
         return asteroids;
 

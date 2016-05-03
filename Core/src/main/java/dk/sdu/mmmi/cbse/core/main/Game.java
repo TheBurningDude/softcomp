@@ -12,6 +12,7 @@ import dk.sdu.mmmi.cbse.common.data.Entity;
 import static dk.sdu.mmmi.cbse.common.data.EntityType.ASTEROIDS;
 import static dk.sdu.mmmi.cbse.common.data.EntityType.BULLET;
 import static dk.sdu.mmmi.cbse.common.data.EntityType.ENEMY;
+import static dk.sdu.mmmi.cbse.common.data.EntityType.MAP;
 import static dk.sdu.mmmi.cbse.common.data.EntityType.PLAYER;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
@@ -99,7 +100,7 @@ public class Game implements ApplicationListener {
             }
 
             if (entity.getType().equals(BULLET)) {
-                sr.setColor(1, 1, 1, 1);
+                sr.setColor(0, 1, 1, 1);
                 sr.begin(ShapeRenderer.ShapeType.Filled);
                 sr.circle(entity.getX() - entity.getRadius() / 2, entity.getY() + entity.getRadius() / 2, 2);
                 sr.end();
@@ -109,7 +110,6 @@ public class Game implements ApplicationListener {
                 sr.setColor(1, 0, 0, 1);
 
                 sr.begin(ShapeRenderer.ShapeType.Line);
-
                 float[] shapex = entity.getShapeX();
                 float[] shapey = entity.getShapeY();
 
@@ -138,6 +138,13 @@ public class Game implements ApplicationListener {
                 }
 
                 sr.end();
+            }
+            if (entity.getType().equals(MAP)) {
+                sr.setColor(1, 1, 0, 1);
+                sr.begin(ShapeRenderer.ShapeType.Filled);
+                sr.circle(entity.getX() - entity.getRadius() / 2, entity.getY() + entity.getRadius() / 2, 2);
+                sr.end();
+
             }
         }
     }

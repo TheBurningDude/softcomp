@@ -23,6 +23,8 @@ public final class Entity implements Serializable {
     private float expiration;
     private int width;
     private int height;
+    private float size;
+    private EntityBody body;
     
     public void reduceExpiration(float delta){
         this.expiration -= delta;
@@ -87,20 +89,20 @@ public final class Entity implements Serializable {
     public void setDy(float dy) {
         this.dy = dy;
     }
-
+    
     public float getX() {
         return x;
     }
-    
-    public void setX(float x){
+
+    public void setX(float x) {
         this.x = x;
     }
 
     public float getY() {
         return y;
     }
-    
-    public void setY(float y){
+
+    public void setY(float y) {
         this.y = y;
     }
 
@@ -179,6 +181,14 @@ public final class Entity implements Serializable {
     
     public void setHeight(int height){
         this.height = height;
+    }
+    
+    public float getSize(){
+        return size;
+    }
+    
+    public void setSize(float size){
+        this.size = size;
     }
 
 }

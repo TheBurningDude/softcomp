@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><module codename="dk.sdu.mmmi.cbse.BulletTest">
-    <module_version install_time="1462217781033" last="true" origin="installer" specification_version="1.0">
+    <module_version install_time="1462312115927" last="true" origin="installer" specification_version="1.0">
         <file crc="909921122" name="config/Modules/dk-sdu-mmmi-cbse-BulletTest.xml"/>
-        <file crc="1023087099" name="modules/dk-sdu-mmmi-cbse-BulletTest.jar"/>
+        <file crc="3060949668" name="modules/dk-sdu-mmmi-cbse-BulletTest.jar"/>
         <file crc="1015876392" name="modules/ext/dk.sdu.mmmi.cbse.BulletTest/com-badlogicgames-gdx/gdx.jar"/>
     </module_version>
 </module>

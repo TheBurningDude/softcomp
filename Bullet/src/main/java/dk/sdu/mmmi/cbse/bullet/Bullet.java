@@ -7,7 +7,7 @@ package dk.sdu.mmmi.cbse.bullet;
 
 import org.osgi.framework.ServiceReference;
 import org.osgi.service.component.ComponentContext;
-import dk.sdu.mmmi.cbse.asteroidsapi.IBulletService;
+//import dk.sdu.mmmi.cbse.asteroidsapi.IBulletService;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 
 /**
@@ -18,12 +18,12 @@ public class Bullet {
     
     ComponentContext context;
     ServiceReference reference;
-    IBulletService bulletService ;
+    //IBulletService bulletService ;
     
     public void activate(ComponentContext context){
         if (reference != null) {
-            bulletService = (IBulletService) context.locateService(
-                    "IBulletService", reference);
+            //bulletService = (IBulletService) context.locateService(
+              //      "IBulletService", reference);
 
             System.out.println("WUDIAAAAAAAAAAAAAAAAAAAAA");
 

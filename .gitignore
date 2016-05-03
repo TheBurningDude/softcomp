@@ -4,3 +4,6 @@
 /AsteroidsAPI/target/
 /BulletTest/target/
 /Movement/target/
+/Map/target/
+/CollisionDetection/target/
+/UserInterface/target/
