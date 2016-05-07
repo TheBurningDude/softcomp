@@ -6,6 +6,7 @@
 package dk.sdu.mmmi.cbse.userinterface;
 
 import dk.sdu.mmmi.cbse.common.data.Entity;
+import dk.sdu.mmmi.cbse.common.data.EntityType;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
 import java.util.Map;
@@ -18,14 +19,37 @@ import org.openide.util.lookup.ServiceProvider;
 @ServiceProvider(service = IGamePluginService.class)
 public class UIEntityPlugin implements IGamePluginService {
 
+    private Map<String, Entity> world;
+    private Entity health;
+    private int pos = 0;
+
     @Override
     public void start(GameData gameData, Map<String, Entity> world) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.world = world;
+        // Add entities to the world
+        for (int i = 0; i < 3; i++) {
+            health = createHealth(gameData);
+            world.put(health.getID(), health);
+            pos = pos + 15;
+        }
+
+    }
+
+    private Entity createHealth(GameData gameData) {
+        Entity healthEntity = new Entity();
+        healthEntity.setType(EntityType.UI);
+        healthEntity.setPosition(50 + pos, 550);
+        healthEntity.setShapeX(new float[4]);
+        healthEntity.setShapeY(new float[4]);
+        healthEntity.setRadians(3.1415f / 2);
+        System.out.println(pos);
+        return healthEntity;
+
     }
 
     @Override
     public void stop(GameData gameData) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        world.remove(health.getID());
     }
-    
+
 }

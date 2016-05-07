@@ -7,5 +7,5 @@ import java.io.Serializable;
  * @author jcs
  */
 public enum EntityType implements Serializable {
-    PLAYER, ENEMY, BULLET, ASTEROIDS, MAP;
+    PLAYER, ENEMY, BULLET, ASTEROIDS, MAP, UI;
 }

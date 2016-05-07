@@ -14,8 +14,6 @@ import static dk.sdu.mmmi.cbse.common.data.GameKeys.SPACE;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import java.util.Map;
 import org.openide.util.lookup.ServiceProvider;
-import static java.lang.Math.cos;
-import static java.lang.Math.sin;
 import static java.lang.Math.sqrt;
 
 /**
@@ -26,8 +24,10 @@ import static java.lang.Math.sqrt;
 public class BulletProcessing implements IEntityProcessingService {
 
     //Declarity services
-    boolean delay = false;
-    long lastPress = 0;
+    boolean playerDelay = false;
+    boolean enemyDelay = false;
+    long lastPressPlayer = 0;
+    long lastPressEnemy = 0;
 
     @Override
     public void process(GameData gameData, Map<String, Entity> world, Entity entity) {
@@ -69,11 +69,10 @@ public class BulletProcessing implements IEntityProcessingService {
         for (Entity entity1 : world.values()) {
 
             if (entity1.getType().equals(PLAYER)) {
-                delay = (System.currentTimeMillis() - lastPress) > 500;
+                playerDelay = (System.currentTimeMillis() - lastPressPlayer) > 500;
 
                 if (gameData.getKeys().isDown(SPACE)) {
-                    if (delay) {
-                        System.out.println("Player");
+                    if (playerDelay) {
                         Entity bullet = new Entity();
                         bullet.setType(BULLET);
                         bullet.setRadians(entity1.getRadians());
@@ -84,17 +83,19 @@ public class BulletProcessing implements IEntityProcessingService {
                         bullet.setDy(entity1.getDy());
                         bullet.setLife(1);
                         world.put(bullet.getID(), bullet);
-                        lastPress = System.currentTimeMillis();
+                        lastPressPlayer = System.currentTimeMillis();
                     }
                 }
             }
 
             if (entity.getType().equals(BULLET)) {
-                dx += cos(radians) * maxSpeed * dt;
-                dy += sin(radians) * maxSpeed * dt;
+                dx += Math.cos(radians) * maxSpeed * dt;
+                dy += Math.sin(radians) * maxSpeed * dt;
 
                 x += dx * dt;
                 y += dy * dt;
+                
+                //max speed for bullet
                 float vec = (float) sqrt(dx * dx + dy * dy);
                 if (vec > maxSpeed) {
                     dx = (dx / vec) * maxSpeed;
@@ -121,11 +122,10 @@ public class BulletProcessing implements IEntityProcessingService {
         int maxSpeed = 5;
 
         for (Entity entity1 : world.values()) {
-            if (entity1.getType().equals(ENEMY) && entity.getType().equals(PLAYER)) {
-                delay = (System.currentTimeMillis() - lastPress) > 500;
+            if (entity1.getType().equals(ENEMY)) {
+                enemyDelay = (System.currentTimeMillis() - lastPressEnemy) > 1000;
 
-                if (delay) {
-                    System.out.println("Enemy");
+                if (enemyDelay) {
                     Entity bullet = new Entity();
                     bullet.setType(BULLET);
                     bullet.setRadians(entity1.getRadians());
@@ -136,14 +136,15 @@ public class BulletProcessing implements IEntityProcessingService {
                     bullet.setDy(entity1.getDy());
                     bullet.setLife(1);
                     world.put(bullet.getID(), bullet);
-                    lastPress = System.currentTimeMillis();
+                    lastPressEnemy = System.currentTimeMillis();
                 }
 
             }
+            
 
             if (entity.getType().equals(BULLET)) {
-                dx += cos(radians) * maxSpeed * dt;
-                dy += sin(radians) * maxSpeed * dt;
+                dx += Math.cos(radians) * maxSpeed * dt;
+                dy += Math.sin(radians) * maxSpeed * dt;
 
                 x += dx * dt;
                 y += dy * dt;

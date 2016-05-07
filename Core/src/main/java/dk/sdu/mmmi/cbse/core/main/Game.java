@@ -14,6 +14,7 @@ import static dk.sdu.mmmi.cbse.common.data.EntityType.BULLET;
 import static dk.sdu.mmmi.cbse.common.data.EntityType.ENEMY;
 import static dk.sdu.mmmi.cbse.common.data.EntityType.MAP;
 import static dk.sdu.mmmi.cbse.common.data.EntityType.PLAYER;
+import static dk.sdu.mmmi.cbse.common.data.EntityType.UI;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
@@ -83,6 +84,23 @@ public class Game implements ApplicationListener {
         for (Entity entity : world.values()) {
             if (entity.getType().equals(PLAYER)) {
                 sr.setColor(1, 1, 1, 1);
+
+                sr.begin(ShapeRenderer.ShapeType.Line);
+
+                float[] shapex = entity.getShapeX();
+                float[] shapey = entity.getShapeY();
+
+                for (int i = 0, j = shapex.length - 1;
+                        i < shapex.length;
+                        j = i++) {
+
+                    sr.line(shapex[i], shapey[i], shapex[j], shapey[j]);
+                }
+
+                sr.end();
+            }
+            if (entity.getType().equals(UI)) {
+                sr.setColor(0, 1, 0, 1);
 
                 sr.begin(ShapeRenderer.ShapeType.Line);
 
