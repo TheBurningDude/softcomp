@@ -2,8 +2,8 @@ Manifest-Version: 1.0
 OpenIDE-Module-Localizing-Bundle: dk/sdu/mmmi/cbse/spring/Bundle.prope
  rties
 OpenIDE-Module-Specification-Version: 1.0
-OpenIDE-Module-Implementation-Version: 1.0-20160507
-OpenIDE-Module-Build-Version: 201605071142
+OpenIDE-Module-Implementation-Version: 1.0-20160508
+OpenIDE-Module-Build-Version: 201605082219
 OpenIDE-Module: dk.sdu.mmmi.cbse.Spring
 OpenIDE-Module-Public-Packages: -
 OpenIDE-Module-Requires: org.openide.modules.ModuleFormat1
