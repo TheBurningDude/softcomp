@@ -70,7 +70,7 @@
         <module>Movement</module>
         <module>Map</module>
         <module>CollisionDetection</module>
-        <module>UserInterface</module>
+        <module>Health</module>
     </modules>
 
     <properties>

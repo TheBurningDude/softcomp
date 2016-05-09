@@ -26,19 +26,20 @@ public class EnemyEntityPlugin implements IGamePluginService {
     public void start(GameData gameData, Map<String, Entity> world) {
         this.world = world;
         //Add entities to the world
-        enemy = createEnemyShip(gameData);
+        enemy = createEnemyShip();
         world.put(enemy.getID(), enemy);
     }
     
-    private Entity createEnemyShip(GameData gameData){
+    private Entity createEnemyShip(){
         Entity enemyShip = new Entity();
         enemyShip.setType(EntityType.ENEMY);
-
+        
+        enemyShip.setRadius(7);
+        enemyShip.setLife(1);
 
 	enemyShip.setShapeX(new float[6]);
         enemyShip.setShapeY(new float[6]);
         
-        //enemyShip.setRadians(3.1415f / 2);
         
         return enemyShip;
         

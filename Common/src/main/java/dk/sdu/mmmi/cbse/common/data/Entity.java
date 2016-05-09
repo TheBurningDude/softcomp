@@ -24,7 +24,6 @@ public final class Entity implements Serializable {
     private int width;
     private int height;
     private float size;
-    private EntityBody body;
     
     public void reduceExpiration(float delta){
         this.expiration -= delta;

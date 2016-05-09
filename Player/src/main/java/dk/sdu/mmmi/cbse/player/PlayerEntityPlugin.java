@@ -40,9 +40,9 @@ public class PlayerEntityPlugin implements IGamePluginService {
         playerShip.setRadians(3.1415f / 2);
         playerShip.setRotationSpeed(5);
         
-        playerShip.setLife(1);
+        playerShip.setLife(3);
         
-        playerShip.setRadius(4);
+        playerShip.setRadius(7);
         
         return playerShip;
     }

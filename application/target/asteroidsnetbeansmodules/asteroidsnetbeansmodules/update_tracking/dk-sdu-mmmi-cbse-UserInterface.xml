@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><module codename="dk.sdu.mmmi.cbse.UserInterface">
-    <module_version install_time="1462747426140" last="true" origin="installer" specification_version="1.0">
-        <file crc="1554721303" name="config/Modules/dk-sdu-mmmi-cbse-UserInterface.xml"/>
-        <file crc="672546052" name="modules/dk-sdu-mmmi-cbse-UserInterface.jar"/>
-    </module_version>
-</module>

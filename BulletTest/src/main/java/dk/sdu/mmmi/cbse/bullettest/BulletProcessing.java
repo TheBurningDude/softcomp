@@ -8,6 +8,7 @@ package dk.sdu.mmmi.cbse.bullettest;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import static dk.sdu.mmmi.cbse.common.data.EntityType.BULLET;
 import static dk.sdu.mmmi.cbse.common.data.EntityType.ENEMY;
+import static dk.sdu.mmmi.cbse.common.data.EntityType.ENEMYBULLET;
 import static dk.sdu.mmmi.cbse.common.data.EntityType.PLAYER;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import static dk.sdu.mmmi.cbse.common.data.GameKeys.SPACE;
@@ -81,6 +82,7 @@ public class BulletProcessing implements IEntityProcessingService {
                         bullet.setY(entity1.getY());
                         bullet.setDx(entity1.getDx());
                         bullet.setDy(entity1.getDy());
+                        bullet.setSize(2);
                         bullet.setLife(1);
                         world.put(bullet.getID(), bullet);
                         lastPressPlayer = System.currentTimeMillis();
@@ -127,13 +129,14 @@ public class BulletProcessing implements IEntityProcessingService {
 
                 if (enemyDelay) {
                     Entity bullet = new Entity();
-                    bullet.setType(BULLET);
+                    bullet.setType(ENEMYBULLET);
                     bullet.setRadians(entity1.getRadians());
                     bullet.setMaxSpeed(maxSpeed);
                     bullet.setX(entity1.getX());
                     bullet.setY(entity1.getY());
                     bullet.setDx(entity1.getDx());
                     bullet.setDy(entity1.getDy());
+                    bullet.setSize(2);
                     bullet.setLife(1);
                     world.put(bullet.getID(), bullet);
                     lastPressEnemy = System.currentTimeMillis();
@@ -142,7 +145,7 @@ public class BulletProcessing implements IEntityProcessingService {
             }
             
 
-            if (entity.getType().equals(BULLET)) {
+            if (entity.getType().equals(ENEMYBULLET)) {
                 dx += Math.cos(radians) * maxSpeed * dt;
                 dy += Math.sin(radians) * maxSpeed * dt;
 

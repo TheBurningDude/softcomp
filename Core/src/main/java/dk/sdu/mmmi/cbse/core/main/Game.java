@@ -12,9 +12,10 @@ import dk.sdu.mmmi.cbse.common.data.Entity;
 import static dk.sdu.mmmi.cbse.common.data.EntityType.ASTEROIDS;
 import static dk.sdu.mmmi.cbse.common.data.EntityType.BULLET;
 import static dk.sdu.mmmi.cbse.common.data.EntityType.ENEMY;
+import static dk.sdu.mmmi.cbse.common.data.EntityType.ENEMYBULLET;
 import static dk.sdu.mmmi.cbse.common.data.EntityType.MAP;
 import static dk.sdu.mmmi.cbse.common.data.EntityType.PLAYER;
-import static dk.sdu.mmmi.cbse.common.data.EntityType.UI;
+import static dk.sdu.mmmi.cbse.common.data.EntityType.HEALTH;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
@@ -24,6 +25,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import javax.swing.JOptionPane;
 
 public class Game implements ApplicationListener {
 
@@ -34,6 +36,7 @@ public class Game implements ApplicationListener {
     private List<IEntityProcessingService> entityProcessors = new ArrayList<>();
     private Map<String, Entity> world = new ConcurrentHashMap<>();
     private List<IGamePluginService> gamePlugins;
+    private int playerLife = 3;
 
     @Override
     public void create() {
@@ -78,11 +81,17 @@ public class Game implements ApplicationListener {
                 entityProcessorService.process(gameData, world, e);
             }
         }
+        
+        if(playerLife == 0){
+            JOptionPane.showMessageDialog(null, "GAME OVER");
+            System.exit(0);
+        }
     }
 
     private void draw() {
         for (Entity entity : world.values()) {
             if (entity.getType().equals(PLAYER)) {
+                playerLife = entity.getLife();
                 sr.setColor(1, 1, 1, 1);
 
                 sr.begin(ShapeRenderer.ShapeType.Line);
@@ -99,25 +108,26 @@ public class Game implements ApplicationListener {
 
                 sr.end();
             }
-            if (entity.getType().equals(UI)) {
+            if (entity.getType().equals(HEALTH)) {
                 sr.setColor(0, 1, 0, 1);
 
                 sr.begin(ShapeRenderer.ShapeType.Line);
+                for (int x = 0; x < playerLife; x++) {
+                    float[] shapex = entity.getShapeX();
+                    float[] shapey = entity.getShapeY();
 
-                float[] shapex = entity.getShapeX();
-                float[] shapey = entity.getShapeY();
+                    for (int i = 0, j = shapex.length - 1;
+                            i < shapex.length;
+                            j = i++) {
 
-                for (int i = 0, j = shapex.length - 1;
-                        i < shapex.length;
-                        j = i++) {
-
-                    sr.line(shapex[i], shapey[i], shapex[j], shapey[j]);
+                        sr.line(shapex[i], shapey[i], shapex[j], shapey[j]);
+                    }
                 }
 
                 sr.end();
             }
 
-            if (entity.getType().equals(BULLET)) {
+            if (entity.getType().equals(BULLET) || entity.getType().equals(ENEMYBULLET)) {
                 sr.setColor(0, 1, 1, 1);
                 sr.begin(ShapeRenderer.ShapeType.Filled);
                 sr.circle(entity.getX() - entity.getRadius() / 2, entity.getY() + entity.getRadius() / 2, 2);
@@ -160,7 +170,7 @@ public class Game implements ApplicationListener {
             if (entity.getType().equals(MAP)) {
                 sr.setColor(1, 1, 0, 1);
                 sr.begin(ShapeRenderer.ShapeType.Filled);
-                sr.circle(entity.getX() - entity.getRadius() / 2, entity.getY() + entity.getRadius() / 2, 2);
+                sr.circle(entity.getX() - entity.getRadius() / 2, entity.getY() + entity.getRadius() / 2, 1);
                 sr.end();
 
             }

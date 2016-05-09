@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><module codename="dk.sdu.mmmi.cbse.Movement">
-    <module_version install_time="1462747425938" last="true" origin="installer" specification_version="1.0">
+    <module_version install_time="1462831311407" last="true" origin="installer" specification_version="1.0">
         <file crc="2495421214" name="config/Modules/dk-sdu-mmmi-cbse-Movement.xml"/>
-        <file crc="2010216895" name="modules/dk-sdu-mmmi-cbse-Movement.jar"/>
+        <file crc="2932586496" name="modules/dk-sdu-mmmi-cbse-Movement.jar"/>
         <file crc="1015876392" name="modules/ext/dk.sdu.mmmi.cbse.Movement/com-badlogicgames-gdx/gdx.jar"/>
     </module_version>
 </module>
