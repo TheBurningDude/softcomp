@@ -39,6 +39,7 @@ public class HealthProcessing implements IEntityProcessingService {
     private void health(Entity entity1, Entity entity2, Map<String, Entity> world) {
 
         if (entity1.getType().equals(PLAYER) && entity2.getType().equals(HEALTH)) {
+            // if the player's health is less or equal to 3 and player is hit, remove one health from the world
             if (entity1.getLife() <= 3 && entity1.getIsHit()) {
                 entity1.setIsHit(false);
                 entity1.setLife(entity1.getLife() - 1);

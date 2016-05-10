@@ -30,6 +30,7 @@ public class HealthEntityPlugin implements IGamePluginService {
         for (int i = 0; i < 3; i++) {
             health = createHealth();
             world.put(health.getID(), health);
+            //sets the position by 15 in the x-axis every time the entity is made
             pos = pos + 15;
         }
 

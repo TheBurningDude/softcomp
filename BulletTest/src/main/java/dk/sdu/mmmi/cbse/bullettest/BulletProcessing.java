@@ -70,12 +70,16 @@ public class BulletProcessing implements IEntityProcessingService {
         for (Entity entity1 : world.values()) {
 
             if (entity1.getType().equals(PLAYER)) {
+                //delay by 500 milliseconds between every shot
                 playerDelay = (System.currentTimeMillis() - lastPressPlayer) > 500;
 
                 if (gameData.getKeys().isDown(SPACE)) {
                     if (playerDelay) {
+                        //new entity
                         Entity bullet = new Entity();
+                        //type BULLET
                         bullet.setType(BULLET);
+                        //player's radians (which way the player looks)
                         bullet.setRadians(entity1.getRadians());
                         bullet.setMaxSpeed(maxSpeed);
                         bullet.setX(entity1.getX());
@@ -83,7 +87,6 @@ public class BulletProcessing implements IEntityProcessingService {
                         bullet.setDx(entity1.getDx());
                         bullet.setDy(entity1.getDy());
                         bullet.setSize(2);
-                        bullet.setLife(1);
                         world.put(bullet.getID(), bullet);
                         lastPressPlayer = System.currentTimeMillis();
                     }
@@ -91,6 +94,7 @@ public class BulletProcessing implements IEntityProcessingService {
             }
 
             if (entity.getType().equals(BULLET)) {
+                //bullet speed
                 dx += Math.cos(radians) * maxSpeed * dt;
                 dy += Math.sin(radians) * maxSpeed * dt;
 
@@ -137,7 +141,6 @@ public class BulletProcessing implements IEntityProcessingService {
                     bullet.setDx(entity1.getDx());
                     bullet.setDy(entity1.getDy());
                     bullet.setSize(2);
-                    bullet.setLife(1);
                     world.put(bullet.getID(), bullet);
                     lastPressEnemy = System.currentTimeMillis();
                 }
