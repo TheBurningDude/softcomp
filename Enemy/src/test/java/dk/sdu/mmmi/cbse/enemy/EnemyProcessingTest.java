@@ -21,10 +21,12 @@ import static org.junit.Assert.*;
  */
 public class EnemyProcessingTest {
     
+    
+    
     public EnemyProcessingTest() {
     }
     //metoden bliver kaldt før testen kører en gang
-   /** @BeforeClass
+    @BeforeClass
     public static void setUpClass() {
         System.out.println("setup class");
     }
@@ -47,7 +49,7 @@ public class EnemyProcessingTest {
     /**
      * Test of process method, of class Enemy.
      */
-    /*@org.junit.Test
+    @org.junit.Test
     public void testProcess() {
         System.out.println("process");
         //Set up
@@ -56,7 +58,7 @@ public class EnemyProcessingTest {
         Entity entity = null;
         
         //execute test
-        Enemy instance = new Enemy();
+        EnemyProcessing instance = new EnemyProcessing();
         instance.process(gameData, world, entity);
         
         //assert - asserter om testen har opfyldt det forventede
@@ -68,16 +70,16 @@ public class EnemyProcessingTest {
     /**
      * Test of shouldRemove method, of class Enemy.
      */
-    /*@org.junit.Test
+    @org.junit.Test
     public void testShouldRemove() {
         System.out.println("shouldRemove");
-        Enemy instance = new Enemy();
+        EnemyProcessing instance = new EnemyProcessing();
         boolean expResult = false;
-        boolean result = instance.shouldRemove();
-        assertEquals(expResult, result);
+        //boolean result = instance.shouldRemove();
+        //assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
-    }*/
+    }
     
     
 }

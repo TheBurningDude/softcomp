@@ -8,3 +8,7 @@
 /CollisionDetection/target/
 /UserInterface/target/
 /Health/target/
+/AsteroidsOSGiClient/target/
+/PlayerSpring/target/
+/BulletClient/target/
+/Movement/nbproject/

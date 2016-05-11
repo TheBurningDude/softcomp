@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: dk.sdu.mmmi.cbse.enemy.EnemyProcessingTest
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.191 sec <<< FAILURE! - in dk.sdu.mmmi.cbse.enemy.EnemyProcessingTest
+testProcess(dk.sdu.mmmi.cbse.enemy.EnemyProcessingTest)  Time elapsed: 0.058 sec  <<< ERROR!
+java.lang.NullPointerException
+	at dk.sdu.mmmi.cbse.enemy.EnemyProcessingTest.testProcess(EnemyProcessingTest.java:62)
+

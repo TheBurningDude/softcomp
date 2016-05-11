@@ -1,0 +1,2 @@
+Bundle-SymbolicName: BulletClient
+Service-Component: META-INF/component.xml

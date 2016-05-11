@@ -4,6 +4,7 @@ import java.util.logging.Level;
 import junit.framework.Test;
 import org.netbeans.junit.NbModuleSuite;
 import org.netbeans.junit.NbTestCase;
+import org.sikuli.script.*;
 
 public class ApplicationTest extends NbTestCase {
 
@@ -27,6 +28,8 @@ public class ApplicationTest extends NbTestCase {
         new ActionNoBlock("Help|About", null).performMenu();
         new NbDialogOperator("About").closeByButton();
          */
+        Screen s = new Screen();
+        
     }
 
 }

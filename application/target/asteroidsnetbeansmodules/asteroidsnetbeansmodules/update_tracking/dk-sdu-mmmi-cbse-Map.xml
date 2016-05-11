@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><module codename="dk.sdu.mmmi.cbse.Map">
-    <module_version install_time="1462831311516" last="true" origin="installer" specification_version="1.0">
+    <module_version install_time="1462980594082" last="true" origin="installer" specification_version="1.0">
         <file crc="1946012951" name="config/Modules/dk-sdu-mmmi-cbse-Map.xml"/>
-        <file crc="2709850740" name="modules/dk-sdu-mmmi-cbse-Map.jar"/>
+        <file crc="4093395502" name="modules/dk-sdu-mmmi-cbse-Map.jar"/>
     </module_version>
 </module>

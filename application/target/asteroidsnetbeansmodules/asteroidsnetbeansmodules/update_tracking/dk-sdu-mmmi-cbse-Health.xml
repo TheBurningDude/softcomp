@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><module codename="dk.sdu.mmmi.cbse.Health">
-    <module_version install_time="1462831311560" last="true" origin="installer" specification_version="1.0">
+    <module_version install_time="1462980594155" last="true" origin="installer" specification_version="1.0">
         <file crc="479302624" name="config/Modules/dk-sdu-mmmi-cbse-Health.xml"/>
-        <file crc="243063657" name="modules/dk-sdu-mmmi-cbse-Health.jar"/>
+        <file crc="1101344453" name="modules/dk-sdu-mmmi-cbse-Health.jar"/>
     </module_version>
 </module>

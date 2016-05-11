@@ -10,14 +10,12 @@ import dk.sdu.mmmi.cbse.common.data.EntityType;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
 import java.util.Map;
-import org.openide.util.lookup.ServiceProvider;
 import java.util.Random;
 
 /**
  *
  * @author nasib
  */
-@ServiceProvider(service = IGamePluginService.class)
 public class AsteroidsEntityPlugin implements IGamePluginService {
 
     private Map<String, Entity> world;
