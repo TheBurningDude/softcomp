@@ -5,9 +5,7 @@ import static dk.sdu.mmmi.cbse.common.data.EntityType.PLAYER;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import java.util.Map;
-import org.openide.util.lookup.ServiceProvider;
 
-@ServiceProvider(service = IEntityProcessingService.class)
 public class PlayerControlSystem implements IEntityProcessingService {
 
     @Override

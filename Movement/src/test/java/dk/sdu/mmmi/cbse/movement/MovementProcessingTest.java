@@ -50,9 +50,12 @@ public class MovementProcessingTest {
         Map<String, Entity> world = null;
         Entity entity = null;
         MovementProcessing instance = new MovementProcessing();
-        instance.process(gameData, world, entity);
+        instance.playerMovement(gameData, entity);
+        
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
+    
+    
     
 }

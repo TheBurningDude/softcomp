@@ -5,7 +5,7 @@
  */
 package dk.sdu.mmmi.cbse.bulletclient;
 
-import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
+import dk.sdu.mmmi.cbse.services.IEntityProcessingService;
 import org.osgi.framework.ServiceReference;
 import org.osgi.service.component.ComponentContext;
 
@@ -23,7 +23,9 @@ public class BulletActivator {
     {
         if (bulletReference != null)
         {
-            bulletProcessor = (IEntityProcessingService)context.locateService("IEntityProcessingService", bulletReference);
+            bulletProcessor = (IEntityProcessingService)context.
+                    locateService(
+                            "IEntityProcessingService", bulletReference);
         }
 
     }

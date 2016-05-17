@@ -7,6 +7,7 @@ package dk.sdu.mmmi.cbse.map;
 
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.EntityType;
+import static dk.sdu.mmmi.cbse.common.data.EntityType.MAP;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
 import java.util.Map;
@@ -51,9 +52,13 @@ public class MapEntityPlugin implements IGamePluginService {
 
     @Override
     public void stop(GameData gameData) {
-        for (int i = 0; i < 50; i++) {
-            world.remove(map.getID());
-        }
-    }
+        for (Entity e : world.values()) {
 
+            if (e.getType().equals(MAP)) {
+                world.remove(e.getID());
+
+            }
+        }
+
+    }
 }

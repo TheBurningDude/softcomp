@@ -5,10 +5,11 @@
  */
 package dk.sdu.mmmi.cbse.asteroids;
 
-import dk.sdu.mmmi.cbse.common.data.Entity;
-import dk.sdu.mmmi.cbse.common.data.EntityType;
-import dk.sdu.mmmi.cbse.common.data.GameData;
-import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
+import dk.sdu.mmmi.cbse.data.Entity;
+import dk.sdu.mmmi.cbse.data.EntityType;
+import static dk.sdu.mmmi.cbse.data.EntityType.ASTEROIDS;
+import dk.sdu.mmmi.cbse.data.GameData;
+import dk.sdu.mmmi.cbse.services.IGamePluginService;
 import java.util.Map;
 import java.util.Random;
 
@@ -42,7 +43,7 @@ public class AsteroidsEntityPlugin implements IGamePluginService {
         int randWidth = rand.nextInt(gameData.getDisplayWidth());
         int randRadians = rand.nextInt((int) (2 * 3.1415f));
         int randSize = rand.nextInt(4 - 1) + 1;
-        
+
         switch (randSize) {
             case 1:
                 asteroids.setMaxSpeed(30);
@@ -70,8 +71,10 @@ public class AsteroidsEntityPlugin implements IGamePluginService {
     @Override
     public void stop(GameData gameData) {
         //Remove entities
-        for (int i = 0; i < 3; i++) {
-            world.remove(asteroid.getID());
+        for (Entity e : world.values()) {
+            if (e.getType().equals(ASTEROIDS)) {
+                world.remove(asteroid.getID());
+            }
         }
     }
 

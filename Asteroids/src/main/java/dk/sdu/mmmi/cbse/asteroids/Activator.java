@@ -1,7 +1,7 @@
 package dk.sdu.mmmi.cbse.asteroids;
 
-import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
-import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
+import dk.sdu.mmmi.cbse.services.IEntityProcessingService;
+import dk.sdu.mmmi.cbse.services.IGamePluginService;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;

@@ -30,7 +30,7 @@ public class EnemyEntityPlugin implements IGamePluginService {
         world.put(enemy.getID(), enemy);
     }
     
-    private Entity createEnemyShip(){
+    public Entity createEnemyShip(){
         Entity enemyShip = new Entity();
         enemyShip.setType(EntityType.ENEMY);
         

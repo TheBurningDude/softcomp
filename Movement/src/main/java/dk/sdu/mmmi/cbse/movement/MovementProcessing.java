@@ -56,7 +56,7 @@ public class MovementProcessing implements IEntityProcessingService {
 
     }
 
-    private void playerMovement(GameData gameData, Entity entity) {
+    public void playerMovement(GameData gameData, Entity entity) {
         float dt = gameData.getDelta();
         float dx = entity.getDx();
         float dy = entity.getDy();

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><module codename="dk.sdu.mmmi.cbse.Spring">
-    <module_version install_time="1462980488840" last="true" origin="installer" specification_version="1.0">
+    <module_version install_time="1463104979623" last="true" origin="installer" specification_version="1.0">
         <file crc="1240930814" name="config/Modules/dk-sdu-mmmi-cbse-Spring.xml"/>
-        <file crc="334809570" name="modules/dk-sdu-mmmi-cbse-Spring.jar"/>
+        <file crc="2428422245" name="modules/dk-sdu-mmmi-cbse-Spring.jar"/>
     </module_version>
 </module>

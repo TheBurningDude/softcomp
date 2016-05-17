@@ -21,65 +21,38 @@ import static org.junit.Assert.*;
  */
 public class EnemyProcessingTest {
     
-    
-    
     public EnemyProcessingTest() {
     }
-    //metoden bliver kaldt før testen kører en gang
+    
     @BeforeClass
     public static void setUpClass() {
-        System.out.println("setup class");
     }
-    //efter testen bliver den kaldt
+    
     @AfterClass
     public static void tearDownClass() {
-        System.out.println("teardown class");
     }
-    //kaldt før hvert unit test
+    
     @Before
     public void setUp() {
-        System.out.println("setup");
     }
-    //kaldt efter hvert unit test
+    
     @After
     public void tearDown() {
-        System.out.println("teardown");
     }
 
     /**
-     * Test of process method, of class Enemy.
+     * Test of process method, of class EnemyProcessing.
      */
-    @org.junit.Test
+    @Test
     public void testProcess() {
         System.out.println("process");
-        //Set up
         GameData gameData = null;
         Map<String, Entity> world = null;
         Entity entity = null;
-        
-        //execute test
         EnemyProcessing instance = new EnemyProcessing();
         instance.process(gameData, world, entity);
-        
-        //assert - asserter om testen har opfyldt det forventede
         // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-        //assert.
+        fail("The test case is a prototype.");
     }
-
-    /**
-     * Test of shouldRemove method, of class Enemy.
-     */
-    @org.junit.Test
-    public void testShouldRemove() {
-        System.out.println("shouldRemove");
-        EnemyProcessing instance = new EnemyProcessing();
-        boolean expResult = false;
-        //boolean result = instance.shouldRemove();
-        //assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
-    
     
 }

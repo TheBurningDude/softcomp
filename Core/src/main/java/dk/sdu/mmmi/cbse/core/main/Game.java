@@ -213,8 +213,9 @@ public class Game implements ApplicationListener {
             for (IGamePluginService gs : gamePlugins) {
                 if (!lookup.lookupAll(IGamePluginService.class).contains(gs)) {
                     gs.stop(gameData);
+                    gamePlugins.remove(gs);
                 }
-                gamePlugins.remove(gs);
+                
             }
         }
     };

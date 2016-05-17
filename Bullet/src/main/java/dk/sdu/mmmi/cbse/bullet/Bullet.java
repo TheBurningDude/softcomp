@@ -5,14 +5,14 @@
  */
 package dk.sdu.mmmi.cbse.bullet;
 
-import dk.sdu.mmmi.cbse.common.data.Entity;
-import static dk.sdu.mmmi.cbse.common.data.EntityType.BULLET;
-import static dk.sdu.mmmi.cbse.common.data.EntityType.ENEMY;
-import static dk.sdu.mmmi.cbse.common.data.EntityType.ENEMYBULLET;
-import static dk.sdu.mmmi.cbse.common.data.EntityType.PLAYER;
-import dk.sdu.mmmi.cbse.common.data.GameData;
-import static dk.sdu.mmmi.cbse.common.data.GameKeys.SPACE;
-import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
+import dk.sdu.mmmi.cbse.data.Entity;
+import static dk.sdu.mmmi.cbse.data.EntityType.BULLET;
+import static dk.sdu.mmmi.cbse.data.EntityType.ENEMY;
+import static dk.sdu.mmmi.cbse.data.EntityType.ENEMYBULLET;
+import static dk.sdu.mmmi.cbse.data.EntityType.PLAYER;
+import dk.sdu.mmmi.cbse.data.GameData;
+import static dk.sdu.mmmi.cbse.data.GameKeys.SPACE;
+import dk.sdu.mmmi.cbse.services.IEntityProcessingService;
 import static java.lang.Math.sqrt;
 import java.util.Map;
 
@@ -32,7 +32,6 @@ public class Bullet implements IEntityProcessingService {
     public void process(GameData gameData, Map<String, Entity> world, Entity entity) {
         playerShoot(gameData, world, entity);
         enemyShoot(gameData, world, entity);
-        System.out.println("SOMALIS");
     }
 
     private void wrap(GameData gameData, Map<String, Entity> world, Entity entity) {

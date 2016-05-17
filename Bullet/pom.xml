@@ -26,15 +26,14 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>dk.sdu.mmmi.cbse</groupId>
-            <artifactId>Common</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
             <groupId>com.badlogicgames.gdx</groupId>
             <artifactId>gdx</artifactId>
             <version>1.5.0</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>BulletAPI</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 

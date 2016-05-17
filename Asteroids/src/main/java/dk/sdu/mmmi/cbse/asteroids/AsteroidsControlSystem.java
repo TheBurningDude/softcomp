@@ -5,10 +5,10 @@
  */
 package dk.sdu.mmmi.cbse.asteroids;
 
-import dk.sdu.mmmi.cbse.common.data.Entity;
-import static dk.sdu.mmmi.cbse.common.data.EntityType.ASTEROIDS;
-import dk.sdu.mmmi.cbse.common.data.GameData;
-import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
+import dk.sdu.mmmi.cbse.data.Entity;
+import static dk.sdu.mmmi.cbse.data.EntityType.ASTEROIDS;
+import dk.sdu.mmmi.cbse.data.GameData;
+import dk.sdu.mmmi.cbse.services.IEntityProcessingService;
 import java.util.Map;
 import java.util.Random;
 

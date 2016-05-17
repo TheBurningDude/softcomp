@@ -65,7 +65,7 @@ public class BulletProcessing implements IEntityProcessingService {
         float dx = entity.getDx();
         float dy = entity.getDy();
         float dt = gameData.getDelta();
-        int maxSpeed = 5;
+        int maxSpeed = 80;
 
         for (Entity entity1 : world.values()) {
 
