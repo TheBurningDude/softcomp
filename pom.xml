@@ -71,7 +71,6 @@
         <module>CollisionDetection</module>
         <module>Health</module>
         <module>PlayerSpring</module>
-    <module>BulletClient</module>
     <module>BulletAPI</module>
   </modules>
 

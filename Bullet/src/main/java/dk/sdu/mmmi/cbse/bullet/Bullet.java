@@ -28,6 +28,11 @@ public class Bullet implements IEntityProcessingService {
     long lastPressPlayer = 0;
     long lastPressEnemy = 0;
 
+    public Bullet() {
+        System.out.println("TEST");
+    }
+    
+
     @Override
     public void process(GameData gameData, Map<String, Entity> world, Entity entity) {
         playerShoot(gameData, world, entity);
